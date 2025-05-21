@@ -1,0 +1,84 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body bg-neutral-cream text-text-primary;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md transition-all duration-300 font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-primary-sage text-white hover:bg-primary-sage-dark;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-terracotta text-white hover:bg-secondary-terracotta-dark;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-lg;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-md border border-neutral-cream-dark focus:border-primary-sage focus:ring-1 focus:ring-primary-sage outline-none transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    @apply bg-neutral-cream;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-primary-sage rounded-full;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Dark mode styles */
+.dark {
+  @apply bg-background-dark text-white;
+}
+
+.dark .card {
+  @apply bg-gray-800;
+}
+
+.dark .input-field {
+  @apply bg-gray-700 border-gray-600 text-white;
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  background: transparent;   /* Chrome, Safari, Opera */
+}
