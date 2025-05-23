@@ -153,9 +153,9 @@ const ProductDisplayPage = () => {
         <div className='space-y-6'>
           <div className='bg-white rounded-2xl shadow-sm p-6 border border-neutral-cream-dark'>
             <div className='flex items-center gap-2 mb-2'>
-              <div className='flex items-center gap-1 text-xs text-primary-sage bg-primary-sage/10 px-2 py-1 rounded-full'>
+              <div className='flex items-center gap-1.5 text-xs font-medium text-primary-sage bg-primary-sage/10 px-3 py-1.5 rounded-full border border-primary-sage/20'>
                 <FaLeaf className="text-xs" />
-                <span>10 min delivery</span>
+                <span>Standard Delivery: 5-7 Business Days</span>
               </div>
               {data.discount > 0 && (
                 <div className='text-xs text-secondary-terracotta bg-secondary-terracotta/10 px-2 py-1 rounded-full'>

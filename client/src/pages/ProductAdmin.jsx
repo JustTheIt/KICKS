@@ -115,68 +115,82 @@ const ProductAdmin = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {productData.map((product) => (
-                  <tr key={product._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                            className="h-10 w-10 rounded object-cover"
-                            src={product.image?.[0] || '/placeholder-product.jpg'}
-                            alt={product.name}
-                          />
+                {[...productData]
+                  .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
+                  .map((product) => (
+                    <tr key={product._id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            <img
+                              className="h-10 w-10 rounded object-cover"
+                              src={product.image?.[0] || '/placeholder-product.jpg'}
+                              alt={product.name}
+                            />
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">{product.name}</div>
+                            {/* Render category name safely */}
+                            <div className="text-xs text-gray-500">{product.category?.name || "No Category"}</div>
+                          </div>
                         </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{product.name}</div>
-                          {/* Render category name safely */}
-                          <div className="text-xs text-gray-500">{product.category?.name || "No Category"}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="text-sm font-medium text-primary-sage">₹{product.price}</span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          {product.quantity}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => {
+                              setOpenEdit(true);
+                              setEditData(product);
+                            }}
+                            className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors"
+                            title="Edit Product"
+                          >
+                            <HiPencil size={16} />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setOpenConfirmBoxDelete(true);
+                              setDeleteProduct(product);
+                            }}
+                            className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"
+                            title="Delete Product"
+                          >
+                            <MdDelete size={16} />
+                          </button>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-medium text-primary-sage">₹{product.price}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        {product.quantity}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => {
-                            setOpenEdit(true);
-                            setEditData(product);
-                          }}
-                          className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors"
-                          title="Edit Product"
-                        >
-                          <HiPencil size={16} />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setOpenConfirmBoxDelete(true);
-                            setDeleteProduct(product);
-                          }}
-                          className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"
-                          title="Delete Product"
-                        >
-                          <MdDelete size={16} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
         )}
 
+        {/* Add Product Modal Overlay */}
         {openUploadProduct && (
-          <UploadProduct
-            close={() => setOpenUploadProduct(false)}
-            fetchData={fetchProduct}
-          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <div className="bg-white rounded-xl shadow-xl p-6 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto">
+              <button
+                onClick={() => setOpenUploadProduct(false)}
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              <UploadProduct
+                close={() => setOpenUploadProduct(false)}
+                fetchData={fetchProduct}
+              />
+            </div>
+          </div>
         )}
 
         {openEdit && (

@@ -1,35 +1,34 @@
 import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
-
-import Testimonial1 from '../assets/testimonial-1.jpg';
-import Testimonial2 from '../assets/testimonial-2.jpg';
-import Testimonial3 from '../assets/testimonial-3.jpg';
+import ajitImg from '../assets/ajit.jpg';
+import chetanImg from '../assets/chetan.jpg';
+import sauravImg from '../assets/Saurav.jpg';
 
 const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Bishwa Sharma',
-      location: 'Gulmi',
-      image: Testimonial1,
-      rating: 5,
-      comment: 'The Ashwagandha powder has transformed my energy levels. After just two weeks of use, I feel more balanced and focused. Authentic Himalayan herbs just like my grandmother used to prepare!'
+      name: 'Ajit',
+      position: 'Position 1',
+      photo: ajitImg,
+      review: 'Ajit review...',
+      rating: 5
     },
     {
       id: 2,
-      name: 'Chetan Koirala',
-      location: 'Dailekh',
-      image: Testimonial2,
-      rating: 4,
-      comment: 'The pain relief oil works wonders for my arthritis. As a farmer, my joints take daily strain, but this traditional formula brings real relief. Finally found authentic remedies in convenient packaging.'
+      name: 'Chetan',
+      position: 'Position 2',
+      photo: chetanImg,
+      review: 'Chetan review...',
+      rating: 5
     },
     {
       id: 3,
-      name: 'Nirajan Singh',
-      location: 'Surkhet',
-      image: Testimonial3,
-      rating: 5,
-      comment: 'I recommend this platform to my patients for its authentic sourcing and quality control. The herbs maintain their potency and the traditional preparation methods are properly followed.'
+      name: 'Saurav',
+      position: 'Position 3',
+      photo: sauravImg,
+      review: 'Saurav review...',
+      rating: 5
     }
   ];
 
@@ -75,20 +74,20 @@ const Testimonials = () => {
               </div>
               
               <p className="text-gray-700 mb-6 relative z-10 italic">
-                "{testimonial.comment}"
+                "{testimonial.review}"
               </p>
               
               <div className="flex items-center">
                 <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center overflow-hidden mr-4">
                   <img
-                    src={testimonial.image}
+                    src={testimonial.photo}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800">{testimonial.name}</h3>
-                  <p className="text-sm text-gray-600">{testimonial.location}</p>
+                  <p className="text-sm text-gray-600">{testimonial.position}</p>
                 </div>
               </div>
             </div>

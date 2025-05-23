@@ -236,68 +236,70 @@ const UserManagement = () => {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {users.map((user) => (
-                                    <tr key={user._id} className="hover:bg-gray-50">
-                                        <td className="px-4 py-3">
-                                            <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <div className="text-sm text-gray-900">{user.email}</div>
-                                        </td>
-                                        <td className="px-4 py-3 whitespace-nowrap">
-                                            <span className="text-sm text-gray-900">{user.mobile || 'N/A'}</span>
-                                        </td>
-                                        <td className="px-4 py-3 whitespace-nowrap">
-                                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                user.status === 'Active' ? 'bg-green-100 text-green-800' :
-                                                user.status === 'Inactive' ? 'bg-yellow-100 text-yellow-800' :
-                                                'bg-red-100 text-red-800'
-                                            }`}>
-                                                {user.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-4 py-3 whitespace-nowrap">
-                                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                user.role === 'ADMIN' ? 'bg-purple-100 text-purple-800' :
-                                                'bg-blue-100 text-blue-800'
-                                            }`}>
-                                                {user.role}
-                                            </span>
-                                        </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedUser(user)
-                                                    setShowUserDetails(true)
-                                                }}
-                                                className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors"
-                                                title="View Details"
-                                            >
-                                                <FaEye size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedUser(user)
-                                                    setOpenStatusEdit(true)
-                                                }}
-                                                className="text-primary-sage hover:text-primary-sage-dark bg-primary-sage/10 hover:bg-primary-sage/20 p-2 rounded-lg transition-colors"
-                                                title="Edit Status"
-                                            >
-                                                <HiPencil size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedUser(user)
-                                                    setOpenConfirmBox(true)
-                                                }}
-                                                className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"
-                                                title="Delete User"
-                                            >
-                                                <MdDelete size={16} />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
+                                {[...users]
+                                    .sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }))
+                                    .map((user) => (
+                                        <tr key={user._id} className="hover:bg-gray-50">
+                                            <td className="px-4 py-3">
+                                                <div className="text-sm font-medium text-gray-900">{user.name}</div>
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                <div className="text-sm text-gray-900">{user.email}</div>
+                                            </td>
+                                            <td className="px-4 py-3 whitespace-nowrap">
+                                                <span className="text-sm text-gray-900">{user.mobile || 'N/A'}</span>
+                                            </td>
+                                            <td className="px-4 py-3 whitespace-nowrap">
+                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                                    user.status === 'Active' ? 'bg-green-100 text-green-800' :
+                                                    user.status === 'Inactive' ? 'bg-yellow-100 text-yellow-800' :
+                                                    'bg-red-100 text-red-800'
+                                                }`}>
+                                                    {user.status}
+                                                </span>
+                                            </td>
+                                            <td className="px-4 py-3 whitespace-nowrap">
+                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                                    user.role === 'ADMIN' ? 'bg-purple-100 text-purple-800' :
+                                                    'bg-blue-100 text-blue-800'
+                                                }`}>
+                                                    {user.role}
+                                                </span>
+                                            </td>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedUser(user)
+                                                        setShowUserDetails(true)
+                                                    }}
+                                                    className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors"
+                                                    title="View Details"
+                                                >
+                                                    <FaEye size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedUser(user)
+                                                        setOpenStatusEdit(true)
+                                                    }}
+                                                    className="text-primary-sage hover:text-primary-sage-dark bg-primary-sage/10 hover:bg-primary-sage/20 p-2 rounded-lg transition-colors"
+                                                    title="Edit Status"
+                                                >
+                                                    <HiPencil size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedUser(user)
+                                                        setOpenConfirmBox(true)
+                                                    }}
+                                                    className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"
+                                                    title="Delete User"
+                                                >
+                                                    <MdDelete size={16} />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>

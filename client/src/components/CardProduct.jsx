@@ -10,12 +10,16 @@ const CardProduct = ({data}) => {
     const url = `/product/${valideURLConvert(data.name)}-${data._id}`
   
     return (
-        <Link to={url} className='group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-neutral-cream-dark h-[400px] w-[280px] flex flex-col'>
+        <Link to={url} className='group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-neutral-cream-dark h-[400px] flex flex-col'>
             <div className='relative h-48 w-full overflow-hidden bg-neutral-cream'>
                 <img 
                     src={data.image[0]}
-                    className='w-full h-full object-scale-down p-4 group-hover:scale-105 transition-transform duration-300'
+                    className='w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300'
                     alt={data.name}
+                    onError={(e) => {
+                        e.target.src = '/placeholder-product.png'
+                        e.target.onerror = null
+                    }}
                 />
                 {data.discount > 0 && (
                     <div className='absolute top-2 right-2 bg-secondary-terracotta text-white text-xs font-medium px-2 py-1 rounded-full'>
@@ -26,9 +30,9 @@ const CardProduct = ({data}) => {
             
             <div className='p-4 space-y-2 flex-grow flex flex-col'>
                 <div className='flex items-center gap-2'>
-                    <div className='flex items-center gap-1 text-xs text-primary-sage bg-primary-sage/10 px-2 py-1 rounded-full'>
+                    <div className='flex items-center gap-1.5 text-xs font-medium text-primary-sage bg-primary-sage/10 px-3 py-1.5 rounded-full border border-primary-sage/20'>
                         <FaLeaf className="text-xs" />
-                        <span>10 min</span>
+                        <span>5-7 Days</span>
                     </div>
                 </div>
 

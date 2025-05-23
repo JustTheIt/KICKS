@@ -32,6 +32,7 @@ import Shipping from "../pages/info/Shipping";
 import Return from "../pages/info/Return";
 import FAQ from "../pages/info/FAQ";
 import Privacy from "../pages/info/Privacy";
+import Product from "../pages/Product";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path : "",
                 element : <Home/>
+            },
+            {
+                path : "products",
+                element : <Product/>
             },
             {
                 path : "about",

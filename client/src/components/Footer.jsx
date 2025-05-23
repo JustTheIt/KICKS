@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { valideURLConvert } from '../utils/valideURLConvert';
 import logo from '../assets/logo.png';
+import { FaFacebook, FaInstagram, FaYoutube, FaPhone, FaEnvelope, FaMapMarker } from "react-icons/fa";
 
 const Footer = () => {
     // Get data from Redux store
@@ -38,87 +39,169 @@ const Footer = () => {
     const kidsUrl = getCategoryUrl('kids');
 
     return (
-        <footer className="bg-gray-100 text-sm text-gray-700 mt-10 border-t">
-            <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                {/* Brand Info */}
-                <div>
-                    <img
-                        src={logo}
-                        alt="KICKS Logo"
-                        className="h-10 mb-4"
-                    />
-                    <p className="text-gray-600">
-                        KICKS is a renowned footwear brand from Nepal that offers a wide range of shoes for men, women, and kids.
-                    </p>
-                </div>
+        <footer className="bg-[#1a1a1a] text-white">
+            {/* Main Footer Content */}
+            <div className="container mx-auto px-4 py-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    {/* Brand Info */}
+                    <div>
+                        <img
+                            src={logo}
+                            alt="KICKS Logo"
+                            className="h-14 mb-6 brightness-0 invert"
+                        />
+                        <p className="text-gray-400 mb-8 leading-relaxed">
+                            KICKS is a premium footwear brand from Nepal, crafting exceptional shoes for men, women, and kids with unmatched quality and style.
+                        </p>
+                        <div className="flex gap-4">
+                            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" 
+                               className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                                <FaFacebook className="w-5 h-5" />
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank" rel="noreferrer"
+                               className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                                <FaInstagram className="w-5 h-5" />
+                            </a>
+                            <a href="https://www.youtube.com" target="_blank" rel="noreferrer"
+                               className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all">
+                                <FaYoutube className="w-5 h-5" />
+                            </a>
+                        </div>
+                    </div>
 
-                {/* Quick Links */}
-                <div>
-                    <h3 className="font-semibold mb-3">Quick Links</h3>
-                    <ul className="space-y-2">
-                        <li><Link to="/" className="hover:text-indigo-600">Home</Link></li>
-                        <li><Link to="/pages/about-us" className="hover:text-indigo-600">About Us</Link></li>
-                        <li><Link to="/pages/contact-us" className="hover:text-indigo-600">Contact Us</Link></li>
-                        <li><Link to="/pages/return-policy" className="hover:text-indigo-600">Return Policy</Link></li>
-                    </ul>
-                </div>
+                    {/* Quick Links */}
+                    <div>
+                        <h4 className="text-xl font-semibold mb-6 text-white">Quick Links</h4>
+                        <ul className="space-y-4">
+                            <li>
+                                <button
+                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group bg-transparent border-0 p-0 m-0 cursor-pointer"
+                                >
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Home
+                                </button>
+                            </li>
+                            <li>
+                                <Link to="/about" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group">
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    About
+                                </Link>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => {
+                                        document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
+                                    }}
+                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group bg-transparent border-0 p-0 m-0 cursor-pointer"
+                                >
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Contact Us
+                                </button>
+                            </li>
+                            <li>
+                                <Link to="/return" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group">
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Return Policy
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
 
-                {/* Categories */}
-                <div>
-                    <h3 className="font-semibold mb-3">Categories</h3>
-                    <ul className="space-y-2">
-                        <li>
-                            <Link 
-                                to={mensUrl}
-                                className="hover:text-indigo-600"
-                            >
-                                Men
-                            </Link>
-                        </li>
-                        <li>
-                            <Link 
-                                to={womensUrl}
-                                className="hover:text-indigo-600"
-                            >
-                                Women
-                            </Link>
-                        </li>
-                        <li>
-                            <Link 
-                                to={kidsUrl}
-                                className="hover:text-indigo-600"
-                            >
-                                Kids
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
+                    {/* Categories */}
+                    <div>
+                        <h4 className="text-xl font-semibold mb-6 text-white">Categories</h4>
+                        <ul className="space-y-4">
+                            <li>
+                                <Link 
+                                    to={mensUrl}
+                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group"
+                                >
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Men
+                                </Link>
+                            </li>
+                            <li>
+                                <Link 
+                                    to={womensUrl}
+                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group"
+                                >
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Women
+                                </Link>
+                            </li>
+                            <li>
+                                <Link 
+                                    to={kidsUrl}
+                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group"
+                                >
+                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                    Kids
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
 
-                {/* Contact Info */}
-                <div>
-                    <h3 className="font-semibold mb-3">Contact</h3>
-                    <ul className="space-y-2">
-                        <li>Email: <a href="mailto:support@kicks.com" className="hover:text-indigo-600">support@kicks.com</a></li>
-                        <li>Phone: <a href="tel:+9779866579810" className="hover:text-indigo-600">+977 9866579810</a></li>
-                        <li>Address: Kathmandu, Nepal</li>
-                    </ul>
-                    <div className="flex gap-3 mt-4">
-                        <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
-                            <img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook" />
-                        </a>
-                        <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
-                            <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" />
-                        </a>
-                        <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
-                            <img src="https://cdn-icons-png.flaticon.com/24/1384/1384060.png" alt="YouTube" />
-                        </a>
+                    {/* Contact Info */}
+                    <div>
+                        <h4 className="text-xl font-semibold mb-6 text-white">Contact Us</h4>
+                        <ul className="space-y-6">
+                            <li className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <FaEnvelope className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-gray-400 text-sm">Email</p>
+                                    <a href="mailto:support@kicks.com" className="text-white hover:text-gray-300 transition-colors">
+                                        support@kicks.com
+                                    </a>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <FaPhone className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-gray-400 text-sm">Phone</p>
+                                    <a href="tel:+9779866579810" className="text-white hover:text-gray-300 transition-colors">
+                                        +977 9866579810
+                                    </a>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <FaMapMarker className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-gray-400 text-sm">Address</p>
+                                    <p className="text-white">Kathmandu, Nepal</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom bar */}
-            <div className="bg-white text-center py-4 border-t text-xs">
-                &copy; {new Date().getFullYear()} KICKS Shoes. All rights reserved.
+            {/* Bottom Bar */}
+            <div className="border-t border-white/10">
+                <div className="container mx-auto px-4 py-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-gray-500 text-sm">
+                            &copy; {new Date().getFullYear()} KICKS Shoes. All rights reserved.
+                        </p>
+                        <div className="flex gap-8">
+                            <Link to="/pages/privacy-policy" className="text-gray-500 hover:text-white transition-colors text-sm">
+                                Privacy Policy
+                            </Link>
+                            <Link to="/pages/terms-of-service" className="text-gray-500 hover:text-white transition-colors text-sm">
+                                Terms of Service
+                            </Link>
+                            <Link to="/pages/shipping-policy" className="text-gray-500 hover:text-white transition-colors text-sm">
+                                Shipping Policy
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
     );
