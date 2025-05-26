@@ -10,6 +10,7 @@ import image1 from '../assets/minute_delivery.png'
 import image2 from '../assets/Best_Prices_Offers.png'
 import image3 from '../assets/Wide_Assortment.png'
 import { pricewithDiscount } from '../utils/PriceWithDiscount'
+import { LiaShippingFastSolid } from "react-icons/lia";
 import AddToCartButton from '../components/AddToCartButton'
 
 const ProductDisplayPage = () => {
@@ -154,7 +155,7 @@ const ProductDisplayPage = () => {
           <div className='bg-white rounded-2xl shadow-sm p-6 border border-neutral-cream-dark'>
             <div className='flex items-center gap-2 mb-2'>
               <div className='flex items-center gap-1.5 text-xs font-medium text-primary-sage bg-primary-sage/10 px-3 py-1.5 rounded-full border border-primary-sage/20'>
-                <FaLeaf className="text-xs" />
+                <LiaShippingFastSolid className="text-xs" />
                 <span>Standard Delivery: 5-7 Business Days</span>
               </div>
               {data.discount > 0 && (

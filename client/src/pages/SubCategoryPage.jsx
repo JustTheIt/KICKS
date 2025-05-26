@@ -7,6 +7,7 @@ import DisplayTable from '../components/DisplayTable'
 import { createColumnHelper } from '@tanstack/react-table'
 import ViewImage from '../components/ViewImage'
 import { FaLeaf } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { HiPencil } from "react-icons/hi";
 import EditSubCategory from '../components/EditSubCategory'
@@ -139,7 +140,7 @@ const SubCategoryPage = () => {
       <div className='bg-white rounded-xl p-6 shadow-sm'>
         <div className='flex items-center justify-between mb-6'>
           <div className='flex items-center gap-2'>
-            <FaLeaf className="text-primary-sage text-xl" />
+            <BiSolidCategory className="text-primary-sage text-xl" />
             <h1 className='font-heading font-semibold text-lg text-text-primary'>Sub Categories</h1>
           </div>
           <button 

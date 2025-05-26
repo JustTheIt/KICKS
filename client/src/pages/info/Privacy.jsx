@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaLeaf, FaShieldAlt, FaUserShield, FaDatabase, FaCookie } from 'react-icons/fa'
+import { MdOutlinePrivacyTip } from "react-icons/md";
 
 const Privacy = () => {
   const privacySections = [
@@ -128,7 +129,7 @@ const Privacy = () => {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
-          <FaLeaf className="text-primary-sage text-2xl" />
+          <MdOutlinePrivacyTip className="text-primary-sage text-2xl" />
           <h1 className="font-heading font-semibold text-2xl text-text-primary">Privacy Policy</h1>
         </div>
 

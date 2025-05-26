@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaLeaf, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { FaPhoneAlt } from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ const Contact = () => {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
-          <FaLeaf className="text-primary-sage text-2xl" />
+          <FaPhoneAlt className="text-primary-sage text-2xl" />
           <h1 className="font-heading font-semibold text-2xl text-text-primary">Contact Us</h1>
         </div>
 

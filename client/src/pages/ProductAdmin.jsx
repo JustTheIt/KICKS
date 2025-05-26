@@ -12,6 +12,7 @@ import { FaLeaf } from "react-icons/fa";
 import { HiPencil } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
+import { AiOutlineProduct } from "react-icons/ai";
 
 const ProductAdmin = () => {
   const [openUploadProduct, setOpenUploadProduct] = useState(false);
@@ -31,6 +32,10 @@ const ProductAdmin = () => {
   const [deleteProduct, setDeleteProduct] = useState({
     _id: ""
   });
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
 
   const fetchProduct = async () => {
     try {
@@ -53,6 +58,19 @@ const ProductAdmin = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  // Calculate the current products to display
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = productData.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(productData.length / itemsPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const handleDeleteProduct = async () => {
     try {
@@ -79,7 +97,7 @@ const ProductAdmin = () => {
       <div className='bg-white rounded-xl p-6 shadow-sm'>
         <div className='flex items-center justify-between mb-6'>
           <div className='flex items-center gap-2'>
-            <FaLeaf className="text-primary-sage text-xl" />
+            <AiOutlineProduct className="text-primary-sage text-xl" />
             <h1 className='font-heading font-semibold text-xl text-text-primary'>Product Management</h1>
           </div>
           <button
@@ -97,29 +115,29 @@ const ProductAdmin = () => {
           <NoData />
         ) : (
           <div className="overflow-x-auto rounded-lg border border-gray-200">
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="min-w-full divide-y divide-gray-200 table-auto w-full">
               <thead className="bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Product
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Price
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Number of Stocks
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {[...productData]
+                {[...currentProducts]
                   .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
                   .map((product) => (
                     <tr key={product._id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
                             <img
@@ -135,15 +153,15 @@ const ProductAdmin = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-4 whitespace-nowrap">
                         <span className="text-sm font-medium text-primary-sage">₹{product.price}</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {product.quantity}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <td className="px-3 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
                           <button
                             onClick={() => {
@@ -158,7 +176,7 @@ const ProductAdmin = () => {
                           <button
                             onClick={() => {
                               setOpenConfirmBoxDelete(true);
-                              setDeleteProduct(product);
+                              setDeleteProduct({ _id: product._id }); // Pass object with _id
                             }}
                             className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"
                             title="Delete Product"
@@ -171,6 +189,41 @@ const ProductAdmin = () => {
                   ))}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {productData.length > itemsPerPage && (
+          <div className="flex justify-center mt-6">
+            <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Previous
+              </button>
+              {[...Array(totalPages).keys()].map(page => (
+                <button
+                  key={page + 1}
+                  onClick={() => handlePageChange(page + 1)}
+                  className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
+                    currentPage === page + 1 
+                      ? 'z-10 bg-primary-sage text-white border-primary-sage' 
+                      : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {page + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </nav>
           </div>
         )}
 

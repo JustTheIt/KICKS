@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaCloudUploadAlt, FaLeaf } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 import uploadImage from '../utils/UploadImage';
 import Loading from '../components/Loading';
 import ViewImage from '../components/ViewImage';
@@ -144,7 +145,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
       <div className='w-full max-w-4xl bg-white rounded-xl p-6 max-h-[90vh] overflow-y-auto'>
         <div className='flex items-center justify-between mb-6'>
           <div className='flex items-center gap-2'>
-            <FaLeaf className="text-primary-sage text-xl" />
+            <AiFillProduct className="text-primary-sage text-xl" />
             <h1 className='font-heading font-semibold text-lg text-text-primary'>Edit Product</h1>
           </div>
           <button onClick={close} className='text-text-secondary hover:text-text-primary transition-colors'>

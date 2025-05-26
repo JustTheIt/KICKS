@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaCheckCircle, FaLeaf, FaTimesCircle } from 'react-icons/fa'
+import { GrReturn } from "react-icons/gr";
 import { useDispatch } from 'react-redux'
 import { clearCart } from '../store/cartProduct'
 import { useGlobalContext } from '../provider/GlobalProvider'
@@ -97,7 +98,7 @@ const Success = () => {
                         {verificationComplete && !error ? (
                             <>
                                 <FaCheckCircle className='text-green-500 text-6xl' />
-                                <FaLeaf className='text-primary-sage-dark text-xl absolute -bottom-1 -right-1' />
+                                {/* <FaLeaf className='text-primary-sage-dark text-xl absolute -bottom-1 -right-1' /> */}
                             </>
                         ) : (
                             <>
@@ -125,7 +126,7 @@ const Success = () => {
                         to="/" 
                         className="bg-primary-sage hover:bg-primary-sage-dark text-white px-6 py-2 rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
-                        <FaLeaf />
+                        <GrReturn />
                         Return Home
                     </Link>
                     

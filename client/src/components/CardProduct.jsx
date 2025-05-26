@@ -3,7 +3,7 @@ import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
 import { Link } from 'react-router-dom'
 import { valideURLConvert } from '../utils/valideURLConvert'
 import { pricewithDiscount } from '../utils/PriceWithDiscount'
-import { FaLeaf } from "react-icons/fa6"
+import { TbTruckDelivery  } from "react-icons/tb"
 import AddToCartButton from './AddToCartButton'
 
 const CardProduct = ({data}) => {
@@ -31,7 +31,7 @@ const CardProduct = ({data}) => {
             <div className='p-4 space-y-2 flex-grow flex flex-col'>
                 <div className='flex items-center gap-2'>
                     <div className='flex items-center gap-1.5 text-xs font-medium text-primary-sage bg-primary-sage/10 px-3 py-1.5 rounded-full border border-primary-sage/20'>
-                        <FaLeaf className="text-xs" />
+                        <TbTruckDelivery  className="text-xs" />
                         <span>5-7 Days</span>
                     </div>
                 </div>

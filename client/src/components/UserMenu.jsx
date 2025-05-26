@@ -62,12 +62,6 @@ const UserMenu = ({ close }) => {
             show: true
         },
         {
-            icon: <FaShoppingBag className="text-primary-sage" />,
-            text: "Order Management",
-            link: "/dashboard/order-management",
-            show: isAdmin(user.role)
-        },
-        {
             icon: <FaUser className="text-primary-sage" />,
             text: "Category",
             link: "/dashboard/category",
@@ -89,6 +83,12 @@ const UserMenu = ({ close }) => {
             icon: <FaUser className="text-primary-sage" />,
             text: "Product",
             link: "/dashboard/product",
+            show: isAdmin(user.role)
+        },
+        {
+            icon: <FaShoppingBag className="text-primary-sage" />,
+            text: "Order Management",
+            link: "/dashboard/order-management",
             show: isAdmin(user.role)
         },
         {

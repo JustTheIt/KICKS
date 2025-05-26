@@ -6,6 +6,7 @@ import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
+import { AiOutlineProduct } from "react-icons/ai";
 import { FaLeaf, FaSync, FaEye, FaCheck, FaTimes, FaFilePdf, FaBoxOpen } from 'react-icons/fa'
 import CofirmBox from '../components/CofirmBox'
 import { format } from 'date-fns'
@@ -232,7 +233,7 @@ const OrderManagement = () => {
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
-                        <FaLeaf className="text-primary-sage text-xl" />
+                        <AiOutlineProduct className="text-primary-sage text-xl" />
                         <h1 className="font-heading font-semibold text-2xl text-text-primary">Order Management</h1>
                     </div>
                     <div className="flex items-center gap-4">

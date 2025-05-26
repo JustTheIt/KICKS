@@ -1,6 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
+import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -33,149 +34,168 @@ import Return from "../pages/info/Return";
 import FAQ from "../pages/info/FAQ";
 import Privacy from "../pages/info/Privacy";
 import Product from "../pages/Product";
+import ScrollToTop from "../components/ScrollToTop";
 
 const router = createBrowserRouter([
     {
-        path : "/",
-        element : <App/>,
-        children : [
+        path: "/",
+        element: <App />,
+        children: [
             {
-                path : "",
-                element : <Home/>
+                path: "",
+                element: <Home />
             },
             {
-                path : "products",
-                element : <Product/>
+                path: "products",
+                element: <Product />
             },
             {
-                path : "about",
-                element : <About/>
+                path: "about",
+                element: <About />
             },
             {
-                path : "benefits",
-                element : <Benefits/>
+                path: "benefits",
+                element: <Benefits />
             },
             {
-                path : "quality",
-                element : <Quality/>
+                path: "quality",
+                element: <Quality />
             },
             {
-                path : "contact",
-                element : <Contact/>
+                path: "contact",
+                element: <Contact />
             },
             {
-                path : "shipping",
-                element : <Shipping/>
+                path: "shipping",
+                element: <Shipping />
             },
             {
-                path : "returns",
-                element : <Return/>
+                path: "returns",
+                element: <Return />
             },
             {
-                path : "faq",
-                element : <FAQ/>
+                path: "faq",
+                element: <FAQ />
             },
             {
-                path : "privacy",
-                element : <Privacy/>
+                path: "privacy",
+                element: <Privacy />
             },
             {
-                path : 'login',
-                element : <Login/>
+                path: "user",
+                element: <UserMenuMobile />
             },
             {
-                path : "register",
-                element : <Register/>
-            },
-            {
-                path : "forgot-password",
-                element : <ForgotPassword/>
-            },
-            {
-                path : "verification-otp",
-                element : <OtpVerification/>
-            },
-            {
-                path : "reset-password",
-                element : <ResetPassword/>
-            },
-            {
-                path : "user",
-                element : <UserMenuMobile/>
-            },
-            {
-                path : "dashboard",
-                element : <Dashboard/>,
-                children : [
+                path: "dashboard",
+                element: <Dashboard />,
+                children: [
                     {
-                        path : "profile",
-                        element : <Profile/>
+                        path: "profile",
+                        element: <Profile />
                     },
                     {
-                        path : "myorders",
-                        element : <MyOrders/>
+                        path: "myorders",
+                        element: <MyOrders />
                     },
                     {
-                        path : "address",
-                        element : <Address/>
+                        path: "address",
+                        element: <Address />
                     },
                     {
-                        path : 'category',
-                        element : <AdminPermision><CategoryPage/></AdminPermision>
+                        path: 'category',
+                        element: <AdminPermision><CategoryPage/></AdminPermision>
                     },
                     {
-                        path : "subcategory",
-                        element : <AdminPermision><SubCategoryPage/></AdminPermision>
+                        path: "subcategory",
+                        element: <AdminPermision><SubCategoryPage/></AdminPermision>
                     },
                     {
-                        path : 'upload-product',
-                        element : <AdminPermision><UploadProduct/></AdminPermision>
+                        path: 'upload-product',
+                        element: <AdminPermision><UploadProduct/></AdminPermision>
                     },
                     {
-                        path : 'product',
-                        element : <AdminPermision><ProductAdmin/></AdminPermision>
+                        path: 'product',
+                        element: <AdminPermision><ProductAdmin/></AdminPermision>
                     },
                     {
                         path: 'user-management',
                         element: <AdminPermision><UserManagement/></AdminPermision>
                     },
                     {
-                        path : "order-management",
-                        element : <AdminPermision><OrderManagement/></AdminPermision>
+                        path: "order-management",
+                        element: <AdminPermision><OrderManagement/></AdminPermision>
                     },
                 ]
             },
             {
-                path : ":category",
-                children : [
+                path: ":category",
+                children: [
                     {
-                        path : ":subCategory",
-                        element : <ProductListPage/>
+                        path: ":subCategory",
+                        element: <ProductListPage />
                     }
                 ]
             },
             {
-                path : "product/:product",
-                element : <ProductDisplayPage/>
+                path: "product/:product",
+                element: <ProductDisplayPage />
             },
             {
-                path : 'cart',
-                element : <CartMobile/>
+                path: 'cart',
+                element: <CartMobile />
             },
             {
-                path : "checkout",
-                element : <CheckoutPage/>
+                path: "checkout",
+                element: <CheckoutPage />
             },
             {
-                path : "success",
-                element : <Success/>
+                path: "success",
+                element: <Success />
             },
             {
-                path : 'cancel',
-                element : <Cancel/>
+                path: 'cancel',
+                element: <Cancel />
+            }
+        ]
+    },
+    {
+        path: "/login",
+        element: <AuthLayout />,
+        children: [
+            {
+                path: "",
+                element: <Login />
+            }
+        ]
+    },
+    {
+        path: "/register",
+        element: <AuthLayout />,
+        children: [
+            {
+                path: "",
+                element: <Register />
+            }
+        ]
+    },
+    {
+        path: "/auth",
+        element: <AuthLayout />,
+        children: [
+            {
+                path: "forgot-password",
+                element: <ForgotPassword />
+            },
+            {
+                path: "verification-otp",
+                element: <OtpVerification />
+            },
+            {
+                path: "reset-password",
+                element: <ResetPassword />
             }
         ]
     }
-])
+]);
 
-export default router
+export default router;

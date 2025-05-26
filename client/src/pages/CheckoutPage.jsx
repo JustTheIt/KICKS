@@ -8,6 +8,8 @@ import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { MdShoppingCartCheckout } from "react-icons/md";
+import { LiaShippingFastSolid } from "react-icons/lia";
 import { FaMapMarkerAlt, FaLeaf, FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
 
 const CheckoutPage = () => {
@@ -184,7 +186,7 @@ const CheckoutPage = () => {
           {/* Order Summary Section */}
           <div className='lg:w-[400px] space-y-4'>
             <div className='flex items-center gap-3 mb-4'>
-              <FaLeaf className="text-primary-sage text-xl" />
+              <MdShoppingCartCheckout className="text-primary-sage text-xl" />
               <h2 className='font-heading font-semibold text-lg text-text-primary'>Order Summary</h2>
             </div>
 
@@ -205,7 +207,7 @@ const CheckoutPage = () => {
                 <div className='flex justify-between items-center'>
                   <p className='text-text-secondary'>Delivery Charge</p>
                   <div className='flex items-center gap-1 text-primary-sage'>
-                    <FaLeaf className="text-sm" />
+                    <LiaShippingFastSolid className="text-sm" />
                     <p className='font-medium'>Free</p>
                   </div>
                 </div>

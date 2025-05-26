@@ -3,7 +3,8 @@ import { IoClose } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
-import { FaCaretRight, FaLeaf } from "react-icons/fa";
+import { FaCaretRight } from "react-icons/fa";
+import { TbTruckDelivery } from "react-icons/tb";
 import { useSelector } from 'react-redux'
 import AddToCartButton from './AddToCartButton'
 import { pricewithDiscount } from '../utils/PriceWithDiscount'
@@ -87,7 +88,7 @@ const DisplayCartItem = ({close}) => {
                                     <div className='flex justify-between items-center'>
                                         <p className='text-text-secondary'>Delivery Charge</p>
                                         <div className='flex items-center gap-1 text-primary-sage'>
-                                            <FaLeaf className="text-sm" />
+                                            <TbTruckDelivery  className="text-sm" />
                                             <p className='font-medium'>Free</p>
                                         </div>
                                     </div>

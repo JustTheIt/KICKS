@@ -72,7 +72,7 @@ const HeroBanner = () => {
               <div className="container mx-auto px-6 text-white">
                 <div className="max-w-4xl space-y-4">
                   <div className="flex items-center text-green-200 mb-2">
-                    <FaLeaf className="mr-2" />
+                    {/* <FaLeaf className="mr-2" /> */}
                     <span className="text-sm font-medium tracking-wider">
                       AYURVEDIC HERBAL SOLUTIONS
                     </span>

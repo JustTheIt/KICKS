@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
-import { FaLeaf } from "react-icons/fa";
+// import { FaLeaf } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 import uploadImage from '../utils/UploadImage';
 import { useSelector } from 'react-redux';
 import Axios from '../utils/Axios';
@@ -80,7 +81,7 @@ const EditSubCategory = ({close, data, fetchData}) => {
             <div className='w-full max-w-lg bg-white rounded-xl p-6'>
                 <div className='flex items-center justify-between mb-6'>
                     <div className='flex items-center gap-2'>
-                        <FaLeaf className="text-primary-sage text-xl" />
+                        <AiFillProduct className="text-primary-sage text-xl" />
                         <h1 className='font-heading font-semibold text-lg text-text-primary'>Edit Sub Category</h1>
                     </div>
                     <button onClick={close} className='text-text-secondary hover:text-text-primary transition-colors'>

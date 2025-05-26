@@ -224,15 +224,16 @@ const UserManagement = () => {
                     <NoData message="No users found in system" />
                 ) : (
                     <div className="overflow-x-auto rounded-lg border border-gray-200">
-                        <table className="min-w-full divide-y divide-gray-200">
+                        <table className="min-w-full divide-y divide-gray-200 table-auto w-full">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+                                    <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -240,33 +241,27 @@ const UserManagement = () => {
                                     .sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }))
                                     .map((user) => (
                                         <tr key={user._id} className="hover:bg-gray-50">
-                                            <td className="px-4 py-3">
+                                            <td className="px-2 py-3">
                                                 <div className="text-sm font-medium text-gray-900">{user.name}</div>
                                             </td>
-                                            <td className="px-4 py-3">
+                                            <td className="px-2 py-3">
                                                 <div className="text-sm text-gray-900">{user.email}</div>
                                             </td>
-                                            <td className="px-4 py-3 whitespace-nowrap">
+                                            <td className="px-2 py-3 whitespace-nowrap">
                                                 <span className="text-sm text-gray-900">{user.mobile || 'N/A'}</span>
                                             </td>
-                                            <td className="px-4 py-3 whitespace-nowrap">
-                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                    user.status === 'Active' ? 'bg-green-100 text-green-800' :
-                                                    user.status === 'Inactive' ? 'bg-yellow-100 text-yellow-800' :
-                                                    'bg-red-100 text-red-800'
-                                                }`}>
+                                            <td className="px-2 py-3">
+                                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.status === 'Active' ? 'bg-green-100 text-green-800' : user.status === 'Inactive' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
                                                     {user.status}
                                                 </span>
                                             </td>
-                                            <td className="px-4 py-3 whitespace-nowrap">
-                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                    user.role === 'ADMIN' ? 'bg-purple-100 text-purple-800' :
-                                                    'bg-blue-100 text-blue-800'
-                                                }`}>
-                                                    {user.role}
-                                                </span>
+                                            <td className="px-2 py-3 whitespace-nowrap">
+                                                <span className="text-sm text-gray-900">{user.role}</span>
                                             </td>
-                                            <td className="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+                                            <td className="px-2 py-3 whitespace-nowrap text-sm text-gray-900">
+                                                {user.createdAt ? format(new Date(user.createdAt), 'PPpp') : 'N/A'}
+                                            </td>
+                                            <td className="px-2 py-3 whitespace-nowrap text-sm font-medium space-x-2">
                                                 <button
                                                     onClick={() => {
                                                         setSelectedUser(user)

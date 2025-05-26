@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
 import { useSelector } from 'react-redux'
 import { FaLeaf } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
 import { HiPencil } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 
@@ -80,7 +81,7 @@ const CategoryPage = () => {
             <div className='bg-white rounded-xl p-6 shadow-sm'>
                 <div className='flex items-center justify-between mb-6'>
                     <div className='flex items-center gap-2'>
-                        <FaLeaf className="text-primary-sage text-xl" />
+                        <BiSolidCategory className="text-primary-sage text-xl" />
                         <h1 className='font-heading font-semibold text-lg text-text-primary'>Categories</h1>
                     </div>
                     <button 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { valideURLConvert } from '../utils/valideURLConvert'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import CardProduct from '../components/CardProduct'
@@ -10,14 +10,68 @@ import { FaMapMarkerAlt, FaLeaf, FaFilter } from "react-icons/fa"
 import ajitImg from '../assets/ajit.jpg'
 import chetanImg from '../assets/chetan.jpg'
 import sauravImg from '../assets/Saurav.jpg'
+import { motion } from "framer-motion";
+
 const Home = () => {
   const loadingCategory = useSelector(state => state.product.loadingCategory)
   const categoryData = useSelector(state => state.product.allCategory)
   const subCategoryData = useSelector(state => state.product.allSubCategory)
   const navigate = useNavigate()
+  const { hash } = useLocation();
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState(null)
+
+  // Animation variants for text and buttons
+  const introTextVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: "spring", stiffness: 100, damping: 15, delay: 0.6 }
+    },
+  };
+
+  const kicksVariants = {
+    initial: { opacity: 0, scale: 0.8, rotate: -10 },
+    animate: { 
+      opacity: 1, 
+      scale: 1, 
+      rotate: 0,
+      transition: { type: "spring", stiffness: 120, damping: 10, delay: 0.8 }
+    },
+  };
+
+  const underlineVariants = {
+      initial: { scaleX: 0 },
+      animate: { scaleX: 1, transition: { duration: 0.5, ease: "easeOut", delay: 1.1 } }
+  }
+
+  const paragraphVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: "spring", stiffness: 100, damping: 15, delay: 1.3 }
+    },
+  };
+
+  const buttonVariants = {
+    initial: { opacity: 0, x: -20 },
+    animate: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { type: "spring", stiffness: 100, damping: 15 }
+    },
+  };
+
+  const buttonsContainerVariants = {
+      animate: { transition: { staggerChildren: 0.2, delayChildren: 1.5 } }
+  }
+
+  const containerVariants = {
+    animate: { transition: { delayChildren: 0.3 } }
+  }
 
   // Testimonial data
   const testimonials = [
@@ -72,7 +126,21 @@ const Home = () => {
 
   useEffect(() => {
     fetchProducts(selectedCategory)
-  }, [selectedCategory])
+
+    // Check if the URL has the #hero-section hash
+    if (hash === '#hero-section') {
+      // Add a small delay to allow the initial scroll to complete
+      const timer = setTimeout(() => {
+        const targetSection = document.getElementById('hero-section');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500); // Adjust delay as needed
+
+      return () => clearTimeout(timer); // Clean up the timer
+    }
+
+  }, [selectedCategory, hash])
 
   const handleRedirectProductListpage = (id, cat) => {
     try {
@@ -95,7 +163,7 @@ const Home = () => {
   return (
     <section className='bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 min-h-screen'>
       {/* Hero Section */}
-      <div className='relative bg-gradient-to-r from-gray-900 to-gray-800 overflow-hidden'>
+      <div id="hero-section" className='relative bg-gradient-to-r from-gray-900 to-gray-800 overflow-hidden'>
         {/* Animated Background Slideshow */}
         <div className="absolute inset-0">
           {/* Background Images */}
@@ -110,6 +178,47 @@ const Home = () => {
           {/* Animated Light Effects */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_100%)] animate-pulse-slow"></div>
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(255,255,255,0.1)_50%,transparent_100%)] animate-shine"></div>
+
+          {/* Abstract Animated Elements */}
+          <motion.div
+              className="absolute top-1/4 left-1/4 w-60 h-60 bg-primary-sage/20 rounded-full mix-blend-screen blur-2xl"
+              animate={{
+                  y: [0, 50, 0],
+                  rotate: [0, 30, 0],
+                  opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{
+                  duration: 15,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+              }}
+          />
+          <motion.div
+              className="absolute bottom-1/4 right-1/4 w-60 h-60 bg-gray-300/10 rounded-full mix-blend-screen blur-2xl"
+               animate={{
+                  y: [0, -50, 0],
+                  rotate: [0, -30, 0],
+                  opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{
+                  duration: 18,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+              }}
+          />
+          <motion.div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary-sage/10 rounded-full mix-blend-screen blur-3xl"
+               animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.1, 0.3, 0.1]
+              }}
+              transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear"
+              }}
+          />
+
         </div>
 
         {/* Background Pattern */}
@@ -118,35 +227,57 @@ const Home = () => {
         <div className='mx-auto max-w-7xl'>
           <div className='relative lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8'>
             {/* Left Content */}
-            <div className='px-6 pb-16 pt-8 sm:pb-24 lg:col-span-7 lg:px-0 lg:pb-32 lg:pt-32 xl:col-span-6'>
+            <motion.div
+            id="hero-content"
+              className='px-6 pb-16 pt-8 sm:pb-24 lg:col-span-7 lg:px-0 lg:pb-32 lg:pt-32 xl:col-span-6'
+              variants={containerVariants}
+              initial="initial"
+              animate="animate"
+            >
               <div className='mx-auto max-w-2xl lg:mx-0'>
                 <h1 className='mt-16 text-4xl font-bold tracking-tight text-white sm:mt-8 sm:text-6xl'>
-                  Step into Style with{' '}
-                  <span className='text-primary-sage relative inline-block'>
+                  <motion.span variants={introTextVariants}>Step into Style with</motion.span>{' '}
+                  <motion.span 
+                      className='text-primary-sage relative inline-block'
+                      variants={kicksVariants}
+                  >
                     KICKS
-                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-primary-sage/50"></span>
-                  </span>
+                    <motion.span 
+                        className="absolute -bottom-2 left-0 w-full h-1 bg-primary-sage/50 transform origin-left"
+                        variants={underlineVariants}
+                    ></motion.span>
+                  </motion.span>
                 </h1>
-                <p className='mt-4 text-lg leading-8 text-gray-300'>
+                <motion.p 
+                  className='mt-4 text-lg leading-8 text-gray-300'
+                  variants={paragraphVariants}
+                >
                   Discover our latest collection of premium footwear. From casual sneakers to formal shoes, find your perfect pair.
-                </p>
-                <div className='mt-8 flex items-center gap-x-6'>
-                  <button
+                </motion.p>
+                <motion.div 
+                  className='mt-8 flex items-center gap-x-6'
+                  variants={buttonsContainerVariants} 
+                  initial="initial"
+                  animate="animate"
+                >
+                  <motion.button
                     onClick={() => document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}
                     className='rounded-md bg-primary-sage px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-primary-sage-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-sage transition-all duration-300 hover:scale-105 hover:shadow-primary-sage/25'
+                    variants={buttonVariants}
                   >
                     Shop Now
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     onClick={() => document.getElementById('categories').scrollIntoView({ behavior: 'smooth' })}
                     className='text-base font-semibold leading-6 text-gray-300 hover:text-white transition-colors duration-300 flex items-center gap-2 group'
+                    variants={buttonVariants}
                   >
                     View Categories 
                     <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Content - Image Grid */}
             <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
@@ -194,7 +325,7 @@ const Home = () => {
       </div>
 
       {/* Category Grid Container */}
-      <div id="categories" className='max-w-7xl mx-auto px-0 sm:px-6 lg:px-8 py-12 bg-white/80 backdrop-blur-sm shadow-lg -mt-1 relative'>
+      <div id="categories" className='max-w-7xl mx-auto px-0 sm:px-6 lg:px-8 py-8 bg-white/80 backdrop-blur-sm shadow-lg -mt-1 relative'>
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/5 to-transparent pointer-events-none"></div>
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -218,11 +349,11 @@ const Home = () => {
               categoryData.map((cat) => (
                 <div 
                   key={`${cat._id}-displayCategory`} 
-                  className='flex-shrink-0 w-32 h-36 cursor-pointer group'
+                  className='flex-shrink-0 w-28 h-32 cursor-pointer group'
                   onClick={() => handleRedirectProductListpage(cat._id, cat.name)}
                 >
-                  <div className='bg-white rounded-lg shadow-md p-4 h-full flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100'>
-                    <div className='w-24 h-24 mb-3 overflow-hidden bg-gray-50 rounded-lg'>
+                  <div className='bg-white rounded-lg shadow-md p-3 h-full flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100'>
+                    <div className='w-20 h-20 mb-2 overflow-hidden bg-gray-50 rounded-lg'>
                       <img 
                         src={cat.image}
                         className='w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-110'

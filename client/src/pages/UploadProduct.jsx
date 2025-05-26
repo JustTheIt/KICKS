@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaCloudUploadAlt, FaLeaf } from "react-icons/fa";
+import { AiOutlineProduct } from "react-icons/ai";
 import uploadImage from '../utils/UploadImage';
 import Loading from '../components/Loading';
 import ViewImage from '../components/ViewImage';
@@ -140,7 +141,7 @@ const UploadProduct = () => {
     <section className='container mx-auto p-4'>
       <div className='bg-white rounded-xl p-6 shadow-sm'>
         <div className='flex items-center gap-2 mb-6'>
-          <FaLeaf className="text-primary-sage text-xl" />
+          <AiOutlineProduct className="text-primary-sage text-xl" />
           <h1 className='font-heading font-semibold text-lg text-text-primary'>Add New Product</h1>
         </div>
 
