@@ -16,8 +16,24 @@ import productRouter from './route/product.route.js';
 import cartRouter from './route/cart.route.js';
 import addressRouter from './route/address.route.js';
 import orderRouter from './route/order.route.js';
+import { createBrowserRouter } from 'react-router-dom';
 
 const app = express();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+]);
 
 // Middleware
 app.use(cors({
