@@ -36,18 +36,24 @@ const MyOrders = () => {
 
   const handleCancelOrder = async (orderId) => {
     try {
-      const response = await fetch(`/api/orders/${orderId}/cancel`, {
+      const response = await fetch(`/api/order/${orderId}/cancel`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }
       })
 
-      if (!response.ok) throw new Error('Failed to cancel order')
+      const responseData = await response.json(); // Read the response body
+
+      if (!response.ok) {
+        // Use the message from the backend response if available, otherwise use a default
+        throw new Error(responseData.message || 'Failed to cancel order');
+      }
 
       toast.success('Order cancelled successfully!')
       setTimeout(() => window.location.reload(), 1000) // Reload to reflect changes
     } catch (error) {
-      toast.error('Failed to cancel order.')
-      console.error(error)
+      // Display the error message received from the backend
+      toast.error(error.message);
+      console.error(error);
     }
   }
 

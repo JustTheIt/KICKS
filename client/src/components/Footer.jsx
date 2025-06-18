@@ -76,10 +76,11 @@ const Footer = () => {
                             <li>
                                 <button
                                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group bg-transparent border-0 p-0 m-0 cursor-pointer"
                                 >
-                                    <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
-                                    Home
+                                    <Link to="/" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group bg-transparent border-0 p-0 m-0 cursor-pointer">
+                                        <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
+                                        Home
+                                    </Link>
                                 </button>
                             </li>
                             <li>
@@ -89,18 +90,13 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <button
-                                    onClick={() => {
-                                        document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
-                                    }}
-                                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group bg-transparent border-0 p-0 m-0 cursor-pointer"
-                                >
+                                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group">
                                     <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
                                     Contact Us
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <Link to="/return" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group">
+                                <Link to="/returns" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3 group">
                                     <span className="w-1 h-1 bg-white rounded-full group-hover:w-2 transition-all"></span>
                                     Return Policy
                                 </Link>

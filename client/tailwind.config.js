@@ -37,7 +37,11 @@ export default {
         background: {
           light: theme.colors.background.light,
           dark: theme.colors.background.dark,
-        }
+        },
+        // Add your brand colors here
+        'brand-orange': '#FF4500',
+        'brand-black': '#111',
+        'brand-white': '#fff',
       },
       fontFamily: {
         heading: theme.typography.fontFamily.heading,
@@ -60,4 +64,3 @@ export default {
     require('@tailwindcss/aspect-ratio'),
   ],
 }
-

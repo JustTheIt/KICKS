@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const OrderCard = ({ order, onDownloadInvoice, onCancelOrder }) => {
+  const [canCancel, setCanCancel] = useState(true);
+  const [showTimeExpiredModal, setShowTimeExpiredModal] = useState(false);
+
+  useEffect(() => {
+    const createdTime = new Date(order.createdAt).getTime();
+    const now = Date.now();
+    const diff = now - createdTime;
+
+    if (diff >= 2 * 60 * 1000) {
+      setCanCancel(false);
+    } else {
+      const timeout = setTimeout(() => {
+        setCanCancel(false);
+      }, 2 * 60 * 1000 - diff);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [order.createdAt]);
+
   const getStatusBadgeClass = (status) => {
     switch (status?.toLowerCase()) {
       case 'approved':
@@ -37,13 +56,45 @@ const OrderCard = ({ order, onDownloadInvoice, onCancelOrder }) => {
     return `${fullName || ''}, ${phone || ''}, ${street || ''}, ${city || ''}, ${province || ''}, ${postalCode || ''}, ${country || ''}`;
   };
 
-  // Ensure product_details is an array
+  const handleCancelClick = () => {
+    if (!canCancel) {
+      setShowTimeExpiredModal(true); // show modal
+      return;
+    }
+
+    if (window.confirm('Are you sure you want to cancel this order?')) {
+      onCancelOrder && onCancelOrder(order._id);
+    }
+  };
+
+  const closeModal = () => {
+    setShowTimeExpiredModal(false);
+  };
+
   const products = Array.isArray(order.product_details)
     ? order.product_details
     : [order.product_details].filter(Boolean);
 
   return (
-    <div className="order rounded p-6 bg-white shadow-md mb-6 max-w-4xl mx-auto">
+    <div className="order rounded p-6 bg-white shadow-md mb-6 max-w-4xl mx-auto relative">
+      {/* MODAL */}
+      {showTimeExpiredModal && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+            <h2 className="text-lg font-bold mb-4 text-red-600">Time Expired</h2>
+            <p className="text-gray-700 mb-4">
+              You are out of time. Order cancellation is only allowed within 2 minutes.
+            </p>
+            <button
+              onClick={closeModal}
+              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="flex justify-between items-start mb-4 flex-wrap">
         <p className="font-semibold text-lg">Order No: {order?.orderId}</p>
         <span
@@ -96,9 +147,7 @@ const OrderCard = ({ order, onDownloadInvoice, onCancelOrder }) => {
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
           <button
-            onClick={() =>
-              onDownloadInvoice && onDownloadInvoice(order._id)
-            }
+            onClick={() => onDownloadInvoice && onDownloadInvoice(order._id)}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
           >
             Download Invoice
@@ -106,14 +155,12 @@ const OrderCard = ({ order, onDownloadInvoice, onCancelOrder }) => {
 
           {order.status?.toLowerCase() === 'pending' && (
             <button
-              onClick={() => {
-                if (
-                  window.confirm('Are you sure you want to cancel this order?')
-                ) {
-                  onCancelOrder && onCancelOrder(order._id);
-                }
-              }}
-              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+              onClick={handleCancelClick}
+              className={`px-4 py-2 text-white rounded transition-colors ${
+                canCancel
+                  ? 'bg-red-600 hover:bg-red-700'
+                  : 'bg-gray-400 cursor-not-allowed'
+              }`}
             >
               Cancel Order
             </button>

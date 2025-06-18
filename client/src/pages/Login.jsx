@@ -295,7 +295,7 @@ const Login = () => {
                                     </motion.button>
                                 </div>
                                 <Link
-                                    to="/forgot-password"
+                                    to="/auth/forgot-password"
                                     className="block text-sm text-primary-sage hover:text-primary-sage-dark text-right mt-1 transition-colors"
                                 >
                                     Forgot password?

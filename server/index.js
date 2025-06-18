@@ -20,13 +20,13 @@ import { createBrowserRouter } from 'react-router-dom';
 
 const app = express();
 
-const router = createBrowserRouter([
-  {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-]);
+// const router = createBrowserRouter([
+//   {
+//   "rewrites": [
+//     { "source": "/(.*)", "destination": "/" }
+//   ]
+// }
+// ]);
 
 // Middleware
 app.use(cors({

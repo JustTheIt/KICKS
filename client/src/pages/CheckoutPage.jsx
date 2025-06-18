@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { FaMapMarkerAlt, FaLeaf, FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
+import { pricewithDiscount } from '../utils/PriceWithDiscount';
 
 const CheckoutPage = () => {
   const { notDiscountTotalPrice, totalPrice, totalQty, fetchCartItem, fetchOrder } = useGlobalContext()
@@ -196,7 +197,10 @@ const CheckoutPage = () => {
                 <div className='flex justify-between items-center'>
                   <p className='text-text-secondary'>Items total</p>
                   <div className='flex items-center gap-2'>
-                    <span className='line-through text-text-secondary text-sm'>{DisplayPriceInRupees(notDiscountTotalPrice)}</span>
+                    {/* Conditionally display original price if there's a discount */}
+                    {notDiscountTotalPrice !== totalPrice && (
+                      <span className='line-through text-text-secondary text-sm'>{DisplayPriceInRupees(notDiscountTotalPrice)}</span>
+                    )}
                     <span className='font-medium text-text-primary'>{DisplayPriceInRupees(totalPrice)}</span>
                   </div>
                 </div>
